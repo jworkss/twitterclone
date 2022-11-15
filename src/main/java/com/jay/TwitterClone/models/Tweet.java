@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,8 @@ public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    
+    @Column(nullable = false)
     private String content;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -34,7 +36,7 @@ public class Tweet {
     @OneToMany(mappedBy = "tweet", orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
-    public Tweet(){
+    public Tweet() {
 
     }
 
@@ -42,5 +44,5 @@ public class Tweet {
         this.content = content;
         this.user = user;
     }
-    
+
 }
