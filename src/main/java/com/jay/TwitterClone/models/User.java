@@ -36,6 +36,9 @@ public class User {
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", orphanRemoval =true )
+    private Set<Tweet> tweets = new HashSet<>();
+
     public User() {
     }
 

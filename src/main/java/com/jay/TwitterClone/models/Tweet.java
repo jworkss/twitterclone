@@ -1,5 +1,8 @@
 package com.jay.TwitterClone.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,16 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table (name = "comments")
-@Getter @Setter
-public class Comment {
-    
+@Table(name = "tweets")
+@Getter
+@Setter
+public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -27,15 +31,16 @@ public class Comment {
     @JoinColumn(name = "userid")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tweetid")
-    private Tweet tweet;
+    @OneToMany(mappedBy = "tweet", orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
-    public Comment() {
+    public Tweet(){
+
     }
 
-    public Comment(String content, User user) {
+    public Tweet(String content, User user) {
         this.content = content;
         this.user = user;
     }
+    
 }
