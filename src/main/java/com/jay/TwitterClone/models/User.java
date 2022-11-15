@@ -36,8 +36,11 @@ public class User {
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", orphanRemoval =true )
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private Set<Tweet> tweets = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private Set<UserRoles> roles = new HashSet<>();
 
     public User() {
     }
@@ -47,5 +50,7 @@ public class User {
         this.handle = handle;
         this.password = password;
     }
+
+    
 
 }
